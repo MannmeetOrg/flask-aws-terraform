@@ -70,18 +70,18 @@ cd app && nohup python3 app.py &
 
 ## 🚀 Terraform Deployment Steps
 🔁 Initialize and Plan (auto-run via GitHub Actions)
-On each push to the main branch:
+* On each push to the main branch:
 
-Terraform init, validate, plan is run
-
-Plan artifact is saved
-
+* Terraform init, validate, plan is run
+ 
+* Plan artifact is saved
+ 
 ## ▶️ Manual Apply from GitHub UI
-Go to Actions → Terraform CI/CD - Manual Apply
+* Go to Actions → Terraform CI/CD - Manual Apply
 
-Click Run workflow
+* Click Run workflow
 
-This will apply the last plan and deploy EC2 + Flask app
+* This will apply the last plan and deploy EC2 + Flask app
 
 ---
 
@@ -89,14 +89,14 @@ This will apply the last plan and deploy EC2 + Flask app
 You’ll see the public IP in GitHub Actions output and in terraform output.
 
 ## 🔥 Manual Destroy (Safe)
-To clean up resources manually:
+* To clean up resources manually:
+ 
+* Go to Actions → Terraform Destroy
 
-Go to Actions → Terraform Destroy
+* Click Run workflow
 
-Click Run workflow
-
-Type destroy in the prompt to confirm
-
+* Type destroy in the prompt to confirm
+ 
 <details> <summary>Show Code</summary>
 
 inputs:
@@ -105,15 +105,15 @@ confirm: "destroy"  # Required to continue
 </details>``
 
 ## 💡 Customization Ideas
-Replace EC2 with Fargate or Beanstalk
-
-Add Load Balancer + Route53 DNS
-
-Store Flask code in S3 or ECR
-
-Use GitHub Environments for approval flows
-
-Add Terraform remote backend (S3 + DynamoDB locking)
+* Replace EC2 with Fargate or Beanstalk
+* 
+* Add Load Balancer + Route53 DNS
+* 
+* Store Flask code in S3 or ECR
+* 
+* Use GitHub Environments for approval flows
+* 
+* Add Terraform remote backend (S3 + DynamoDB locking)
 
 ---
 
