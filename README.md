@@ -106,13 +106,13 @@ confirm: "destroy"  # Required to continue
 
 ## 💡 Customization Ideas
 * Replace EC2 with Fargate or Beanstalk
-* 
+
 * Add Load Balancer + Route53 DNS
-* 
+ 
 * Store Flask code in S3 or ECR
-* 
+
 * Use GitHub Environments for approval flows
-* 
+
 * Add Terraform remote backend (S3 + DynamoDB locking)
 
 ---
