@@ -40,17 +40,23 @@ This project demonstrates how to automatically deploy a simple Flask application
 
 ## 📦 Flask Application
 
-# ```python
-# app/app.py
+<details>
+  <summary>Show Code</summary>
+
+```python
+# File: app/app.py
 from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello from Flask deployed with Terraform on AWS!"
+return "Hello from Flask deployed with Terraform on AWS!"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0', port=80)
+
+</details> ```
+
 
 ---
 
