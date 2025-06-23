@@ -100,11 +100,12 @@ You’ll see the public IP in GitHub Actions output and in terraform output.
  
 <details> <summary>Show Code</summary>
 
-inputs:
-confirm: "destroy"  # Required to continue
-
+    ```destroy
+        inputs:
+        confirm: "destroy"  # Required to continue
+    ```
 </details>``
-
+    
 ## 💡 Customization Ideas
 * Replace EC2 with Fargate or Beanstalk
 
