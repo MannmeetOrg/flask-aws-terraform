@@ -55,13 +55,13 @@ app.run(host='0.0.0.0', port=80)
 </details> ```
 
 
-## 🔧 Makefile (Used in EC2 User Data)
+## 🔧 Makefile 
 
-<details> <summary>Show Code</summary>
+<details> <summary>Show Code</summary>``
 
 install:
-echo "Starting Flask app installation..." /
-cd app && pip3 install -r requirements.txt /
+echo "Starting Flask app installation..." 
+cd app && pip3 install -r requirements.txt 
 cd app && nohup python3 app.py &
 
 </details>``
