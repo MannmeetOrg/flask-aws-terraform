@@ -40,10 +40,8 @@ This project demonstrates how to automatically deploy a simple Flask application
 
 ## 📦 Flask Application
 
-<details>
-  <summary>Show Code</summary>
+<details> <summary>Show Code</summary>
 
-```python
 # File: app/app.py
 from flask import Flask
 app = Flask(__name__)
@@ -58,15 +56,17 @@ app.run(host='0.0.0.0', port=80)
 </details> ```
 
 
----
-
 ## 🔧 Makefile (Used in EC2 User Data)
 
-# install:
-#	@echo "Starting Flask app installation..."
-#	cd app && pip3 install -r requirements.txt
-#	cd app && nohup python3 app.py &
----
+<details> <summary>Show Code</summary>
+
+install:
+echo "Starting Flask app installation..."
+cd app && pip3 install -r requirements.txt
+cd app && nohup python3 app.py &
+
+</details>``
+
 
 ## 🚀 Terraform Deployment Steps
 🔁 Initialize and Plan (auto-run via GitHub Actions)
@@ -97,10 +97,12 @@ Click Run workflow
 
 Type destroy in the prompt to confirm
 
-# inputs:
-# confirm: "destroy"  # Required to continue
+<details> <summary>Show Code</summary>
 
----
+inputs:
+confirm: "destroy"  # Required to continue
+
+</details>``
 
 ## 💡 Customization Ideas
 Replace EC2 with Fargate or Beanstalk
