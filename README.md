@@ -7,7 +7,6 @@ This project demonstrates how to automatically deploy a simple Flask application
 ## 📂 Project Structure
 
 ...
-
 .
 ├── .github/
 │ └── workflows/
@@ -23,9 +22,7 @@ This project demonstrates how to automatically deploy a simple Flask application
 ├── terraform.tfvars # (Optional) Input values
 ├── backend.tf # (Optional) S3 backend config
 └── README.md # Project documentation
-
----
-
+```
 
 ---
 
@@ -55,14 +52,14 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 
 
-🔧 Makefile (Used in EC2 User Data)
+## 🔧 Makefile (Used in EC2 User Data)
 
 install:
 	@echo "Starting Flask app installation..."
 	cd app && pip3 install -r requirements.txt
 	cd app && nohup python3 app.py &
 
-🚀 Terraform Deployment Steps
+## 🚀 Terraform Deployment Steps
 🔁 Initialize and Plan (auto-run via GitHub Actions)
 On each push to the main branch:
 
@@ -70,17 +67,17 @@ Terraform init, validate, plan is run
 
 Plan artifact is saved
 
-▶️ Manual Apply from GitHub UI
+## ▶️ Manual Apply from GitHub UI
 Go to Actions → Terraform CI/CD - Manual Apply
 
 Click Run workflow
 
 This will apply the last plan and deploy EC2 + Flask app
 
-✅ Output
+## ✅ Output
 You’ll see the public IP in GitHub Actions output and in terraform output.
 
-🔥 Manual Destroy (Safe)
+## 🔥 Manual Destroy (Safe)
 To clean up resources manually:
 
 Go to Actions → Terraform Destroy
@@ -92,7 +89,7 @@ Type destroy in the prompt to confirm
 inputs:
   confirm: "destroy"  # Required to continue
 
-💡 Customization Ideas
+## 💡 Customization Ideas
 Replace EC2 with Fargate or Beanstalk
 
 Add Load Balancer + Route53 DNS
@@ -103,10 +100,10 @@ Use GitHub Environments for approval flows
 
 Add Terraform remote backend (S3 + DynamoDB locking)
 
-📜 License
+## 📜 License
 MIT License
 
-🎓 FOR NEW LEARNERS
+## 🎓 FOR NEW LEARNERS
 
 You can try with Customerization ideas provided.
 Make sure you create your own repo to build with the help of this sample repo.
