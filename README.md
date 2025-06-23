@@ -4,7 +4,6 @@ This project demonstrates how to automatically deploy a simple Flask application
 
 ---
 
-## 📂 Project Structure
 ## 📁 Project Structure
 
 ```
