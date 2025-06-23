@@ -5,8 +5,9 @@ This project demonstrates how to automatically deploy a simple Flask application
 ---
 
 ## 📂 Project Structure
+## 📁 Project Structure
 
-...
+```
 .
 ├── .github/
 │ └── workflows/
@@ -39,7 +40,7 @@ This project demonstrates how to automatically deploy a simple Flask application
 
 ## 📦 Flask Application
 
-```python
+# ```python
 # app/app.py
 from flask import Flask
 app = Flask(__name__)
@@ -55,10 +56,10 @@ if __name__ == "__main__":
 
 ## 🔧 Makefile (Used in EC2 User Data)
 
-install:
-	@echo "Starting Flask app installation..."
-	cd app && pip3 install -r requirements.txt
-	cd app && nohup python3 app.py &
+# install:
+#	@echo "Starting Flask app installation..."
+#	cd app && pip3 install -r requirements.txt
+#	cd app && nohup python3 app.py &
 ---
 
 ## 🚀 Terraform Deployment Steps
@@ -90,8 +91,8 @@ Click Run workflow
 
 Type destroy in the prompt to confirm
 
-inputs:
-  confirm: "destroy"  # Required to continue
+# inputs:
+# confirm: "destroy"  # Required to continue
 
 ---
 
