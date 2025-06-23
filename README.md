@@ -51,6 +51,7 @@ def hello():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 
+---
 
 ## 🔧 Makefile (Used in EC2 User Data)
 
@@ -58,6 +59,7 @@ install:
 	@echo "Starting Flask app installation..."
 	cd app && pip3 install -r requirements.txt
 	cd app && nohup python3 app.py &
+---
 
 ## 🚀 Terraform Deployment Steps
 🔁 Initialize and Plan (auto-run via GitHub Actions)
@@ -74,6 +76,8 @@ Click Run workflow
 
 This will apply the last plan and deploy EC2 + Flask app
 
+---
+
 ## ✅ Output
 You’ll see the public IP in GitHub Actions output and in terraform output.
 
@@ -89,6 +93,8 @@ Type destroy in the prompt to confirm
 inputs:
   confirm: "destroy"  # Required to continue
 
+---
+
 ## 💡 Customization Ideas
 Replace EC2 with Fargate or Beanstalk
 
@@ -100,8 +106,12 @@ Use GitHub Environments for approval flows
 
 Add Terraform remote backend (S3 + DynamoDB locking)
 
+---
+
 ## 📜 License
 MIT License
+
+---
 
 ## 🎓 FOR NEW LEARNERS
 
