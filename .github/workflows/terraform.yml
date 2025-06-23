@@ -1,4 +1,4 @@
-name: Terraform Flask Application on AWS
+name: Terraform Automation for Flask Application on AWS
 
 on:
   workflow_dispatch:  # Enables manual execution from GitHub UI
