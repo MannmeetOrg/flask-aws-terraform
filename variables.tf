@@ -7,6 +7,15 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  description = "Name of your AWS EC2 key pair"
-  default     = "your-key-name"
+  description = "EC2 key pair name"
+  type        = string
+}
+
+variable "ami_id" {
+  default = "ami-0c02fb55956c7d316" # Amazon Linux 2 AMI (Free Tier)
+}
+
+variable "vpc_id" {
+  description = "Default or custom VPC ID"
+  type        = string
 }
