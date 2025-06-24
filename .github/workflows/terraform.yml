@@ -17,13 +17,14 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
+      - name: gather credentials
+        env:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
+          aws-region: us-east-2
+          AWS_KEY_PAIR: ${{ secrets.AWS_KEY_PAIR }}
+          MEDIUM_USERNAME: ${{ secrets.MEDIUM_USER }}
+          MEDIUM_PASSWORD: ${{ secrets.MEDIUM_PASS }}
       - name: Terraform Init
         run: terraform init -backend-config=terraform.tfvars
 
