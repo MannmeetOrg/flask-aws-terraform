@@ -31,4 +31,4 @@ jobs:
         run: terraform init -backend-config=terraform.tfvars
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="key_pair_name=${{ secrets.AWS_KEY_PAIR }}"
+        run: terraform apply -auto-approve
