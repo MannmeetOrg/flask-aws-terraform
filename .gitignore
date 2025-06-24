@@ -12,6 +12,8 @@ env/
 .venv/
 venv/
 .env          # Secrets stored locally for Flask or AWS CLI
+.env.* # Secrets stored locally for Flask or AWS CLI
+
 
 # ------------------------
 # Terraform
