@@ -1,20 +1,9 @@
 # Flask App for Terraform on AWS
 
-# app.py
 import os
-from flask import Flask
-from dotenv import load_dotenv
-import boto3
+aws_key = os.getenv("AWS_ACCESS_KEY_ID")
 
-load_dotenv()  # Load from .env
-
-s3 = boto3.client(
-    's3',
-    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
-    region_name=os.getenv("AWS_REGION")
-)
-
+load_dotenv()
 
 from flask import Flask, render_template
 
