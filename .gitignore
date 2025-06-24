@@ -1,0 +1,58 @@
+# ------------------------
+# Python / Flask
+# ------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.log
+*.egg-info/
+env/
+.venv/
+venv/
+.env          # Secrets stored locally for Flask or AWS CLI
+
+# ------------------------
+# Terraform
+# ------------------------
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars  # Often contains AWS credentials or key names
+crash.log
+*.plan
+tfplan
+
+# ------------------------
+# Keys and Secrets
+# ------------------------
+*.pem          # SSH private keys
+*.key
+*.crt
+.aws/          # Local AWS CLI credentials/config
+
+# ------------------------
+# System Files
+# ------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# Editor / IDEs
+# ------------------------
+.vscode/
+.idea/
+*.swp
+
+# ------------------------
+# GitHub Actions artifacts (optional)
+# ------------------------
+.github/workflows/*.log
+
+# ------------------------
+# Output folders / logs
+# ------------------------
+output/
+logs/
