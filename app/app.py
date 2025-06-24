@@ -1,10 +1,11 @@
 # Flask App for Terraform on AWS
-from flask import Flask
+from flask import Flask, render_template
+
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    return "Hello from Flask deployed with Terraform on AWS!"
+def home():
+    return render_template('index.html')
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+if __name__ == '__main__':
+    app.run(debug=True, port=80) # Port 80 is the default HTTP port where App is then exposed to Internet.
