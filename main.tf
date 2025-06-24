@@ -58,7 +58,7 @@ resource "aws_security_group" "flask_sg" {
 resource "aws_instance" "flask_ec2" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
-  key_name                    = var.key_name
+  key_name                    = var.key_pair_name
   vpc_security_group_ids      = [aws_security_group.flask_sg.id]
   associate_public_ip_address = true
 
