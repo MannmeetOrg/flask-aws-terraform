@@ -15,13 +15,19 @@ This project demonstrates how to automatically deploy a simple Flask application
 ├── app/
 │ ├── app.py # Flask application
 │ └── requirements.txt # Flask dependency
+├── terraform/
+│   ├── main.tf # Terraform resource definitions
+│   ├── variables.tf # Input variables
+│   ├── outputs.tf # Public IP output
+│   ├── terraform.tfvars # (Optional) Input values
+│   ├── backend.tf # (Optional) S3 backend config
+│   ├── key-pair.tf # (Optional) EC2 Key Pair configuration
+│   ├── security-group.tf # Security Group definition
+│   ├── instance.tf # EC2 Instance definition
+│   └── vpc.tf # VPC Definition
 ├── Makefile # App startup automation (used in EC2)
-├── main.tf # Terraform resource definitions
-├── variables.tf # Input variables
-├── outputs.tf # Public IP output
-├── terraform.tfvars # (Optional) Input values
-├── backend.tf # (Optional) S3 backend config
-└── README.md # Project documentation
+├── README.md # Project documentation
+└── .gitignore
 ```
 
 ---
