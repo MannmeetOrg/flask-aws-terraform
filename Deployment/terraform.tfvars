@@ -5,6 +5,6 @@ key_pair_name = "my-key"
 sg-name = "sg-04d1ac6f01f77056a" # Enter your security group name
 subnet_az = "us-east-1a" # Enter your az
 vpc-cidr = "172.31.0.0/16" # Enter the cidr for vpc
-
+vpc_id = "vpc-01b0e42325efca6e6" # Enter your vpc-id
 
 
