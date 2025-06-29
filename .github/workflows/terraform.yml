@@ -20,6 +20,9 @@ jobs:
       - name: Set environment
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
+      - name: Export public key
+        run: echo "${{ secrets.PUBLIC_KEY }}" > ec2key.pem
+
       - name: Load credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
