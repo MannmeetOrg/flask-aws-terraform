@@ -24,8 +24,7 @@ jobs:
         working-directory: Deployment
 
       - name: Terraform Apply
-        run: terraform apply --auto-approve
+        run: terraform apply -var "key_pair_name=${{ secrets.KEY_PAIR_NAME }}" --auto-approve
         working-directory: Deployment
-        env:
-          public_key: ${{ secrets.PUBLIC_KEY }}
+
 
