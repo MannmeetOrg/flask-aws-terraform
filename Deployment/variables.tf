@@ -28,4 +28,3 @@ variable "sg-name" {
   description = "Name of the security group"
   type        = string
 }
-variable "public_key" {}
