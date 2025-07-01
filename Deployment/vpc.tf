@@ -1,6 +1,6 @@
 # VPC Module
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_id
+  cidr_block = var.vpc-cidr
   vpc_id   = var.vpc_id
 
   tags = {
@@ -10,7 +10,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "main" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.vpc_id
+  cidr_block = "172.31.1.0/24"
 
   tags = {
     Name = "Main"
@@ -30,7 +30,7 @@ resource "aws_route_table" "flask-rt" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = var.vpc_id
+    cidr_block = "0.0.0.0/0"    #
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {

@@ -67,8 +67,8 @@ resource "aws_instance" "flask_ec2" {
               yum update -y
               yum install -y git make python3-pip
               cd /home/ec2-user
-              git clone https://github.com/your-username/flaskapp-terraform-deploy.git
-              cd flaskapp-terraform-deploy
+              git clone https://github.com/MannmeetOrg/flask-aws-terraform.git
+              cd flask-aws-terraform
               make install
               EOF
 
