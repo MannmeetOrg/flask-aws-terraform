@@ -5,6 +5,6 @@ key_pair_name = "my-key"
 vpc_cidr_block = "172.31.0.0/16" # Enter the cidr for vpc
 subnet_cidr_block  = "172.31.80.0/20" # Enter the cidr for subnet
 subnet_az    = "us-east-1a" # Enter the availability zone
-vpc_id = "vpc-01b0e42325efca6e6" # Enter your vpc-id
+vpc_id = "vpc_id"
 
 
