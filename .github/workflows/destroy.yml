@@ -14,6 +14,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: Deployment
+
       - name: Terraform Destroy
         run: terraform destroy -var "key_pair_name=${{ secrets.KEY_PAIR_NAME }}" --auto-approve
-
+        working-directory: Deployment
