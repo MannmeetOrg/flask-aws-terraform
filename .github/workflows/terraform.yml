@@ -2,16 +2,6 @@
 name: Terraform Deploy
 on:
   workflow_dispatch:
-    inputs:
-      action:
-        description: 'Action to perform'
-        required: true
-        default: 'plan'
-        type: choice
-        options:
-          - plan
-          - apply
-          - destroy
 
 jobs:
   terraform:
@@ -33,7 +23,9 @@ jobs:
         run: terraform init
         working-directory: Deployment
 
-      - name: Terraform Plan
-        if: github.event.inputs.action == 'plan'
-        run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
         working-directory: Deployment
+        env:
+          TF_VAR_private_key: ${{ secrets.PUBLIC_KEY }}
+
