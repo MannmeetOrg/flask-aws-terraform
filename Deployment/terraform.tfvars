@@ -2,7 +2,6 @@ region   = "us-east-1"
 ami_id = "ami-09e6f87a47903347c" # Enter your ami id
 instance_type = "t2.micro"
 key_pair_name = "my-key"
-sg-name = "sg-04d1ac6f01f77056a" # Enter your security group name
 vpc_cidr_block = "172.31.0.0/16" # Enter the cidr for vpc
 subnet_cidr_block  = "172.31.80.0/20" # Enter the cidr for subnet
 subnet_az    = "us-east-1a" # Enter the availability zone

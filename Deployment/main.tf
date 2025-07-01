@@ -61,6 +61,10 @@ resource "aws_instance" "flask_ec2" {
   key_name                    = var.key_pair_name
   vpc_security_group_ids      = [aws_security_group.flask_sg.id]
   associate_public_ip_address = true
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+  associate_public_ip_address = true
 
   user_data = <<-EOF
               #!/bin/bash
