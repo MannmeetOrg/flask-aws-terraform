@@ -1,21 +1,19 @@
+provider "aws" {
+  region = var.region
+}
+
 # VPC Module
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc-cidr
-  vpc_id   = var.vpc_id
-
-  tags = {
-    Name = "main"
-  }
+  cidr_block = var.vpc_cidr_block
 }
 
 resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "172.31.1.0/24"
-
-  tags = {
-    Name = "Main"
-  }
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.subnet_cidr_block
+  availability_zone       = var.subnet_az
+  map_public_ip_on_launch = true
 }
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id

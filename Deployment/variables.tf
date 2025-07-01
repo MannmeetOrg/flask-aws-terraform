@@ -1,30 +1,34 @@
-variable "aws_region" {
-  default = "us-east-1"
-}
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "key_pair_name" {
-  description = "EC2 Key Pair Name"
+variable "region" {
+  description = "AWS region"
   type        = string
 }
 
-variable "ami_id" {
-  default = "ami-0c02fb55956c7d316" # Amazon Linux 2 AMI (Free Tier)
-}
-
-variable "vpc_id" {
-  description = "Default or custom VPC ID"
-  type        = string
-}
-variable "vpc-cidr" {
+variable "vpc_cidr_block" {
   description = "CIDR block for the VPC"
   type        = string
 }
 
-variable "sg-name" {
-  description = "Name of the security group"
+variable "subnet_cidr_block" {
+  description = "CIDR block for the subnet"
+  type        = string
+}
+
+variable "subnet_az" {
+  description = "Availability Zone for subnet"
+  type        = string
+}
+
+variable "key_pair_name" {
+  description = "EC2 Key Pair name for SSH"
+  type        = string
+}
+
+variable "ami_id" {
+  description = "AMI ID to use"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
   type        = string
 }
