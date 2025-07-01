@@ -27,5 +27,5 @@ jobs:
         run: terraform apply --auto-approve
         working-directory: Deployment
         env:
-          TF_VAR_private_key: ${{ secrets.PUBLIC_KEY }}
+          public_key: ${{ secrets.PUBLIC_KEY }}
 
