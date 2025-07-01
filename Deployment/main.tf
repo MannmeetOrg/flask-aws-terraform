@@ -34,6 +34,20 @@ resource "aws_security_group" "flask_sg" {
   }
 
   ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Flask (optional)
+  }
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -62,6 +76,7 @@ resource "aws_instance" "flask_ec2" {
   subnet_id                   = aws_subnet.main.id  # ✅ Custom VPC
   vpc_security_group_ids      = [aws_security_group.flask_sg.id] # Custom VPC
   associate_public_ip_address = true
+  map_public_ip_on_launch    = true
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
