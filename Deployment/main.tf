@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = var.region
 }
 
 # ------------------------------
@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_security_group" "flask_sg" {
   name        = "flask_app_sg"
   description = "Allow HTTP and HTTPS access"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 80
