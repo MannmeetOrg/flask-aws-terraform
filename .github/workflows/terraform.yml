@@ -1,16 +1,7 @@
-name: Terraform Plan & Apply
+name: Terraform Plan and Apply
 
 on:
-  workflow_dispatch:
-    inputs:
-      run_apply:
-        description: "Do you want to run Terraform Apply after Plan?"
-        required: true
-        default: "no"
-        type: choice
-        options:
-          - yes
-          - no
+  workflow_dispatch:  # Manual trigger from GitHub Actions UI
 
 jobs:
   plan:
@@ -18,10 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      plan_status: ${{ steps.plan_step.outcome }}
+      plan_status: ${{ steps.plan.outcome }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -38,18 +30,19 @@ jobs:
         working-directory: Deployment
 
       - name: Terraform Plan
-        id: plan_step
+        id: plan
         run: terraform plan -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}"
         working-directory: Deployment
 
   apply:
     name: Terraform Apply
-    needs: plan
-    if: ${{ github.event.inputs.run_apply == 'yes' && success() }}
     runs-on: ubuntu-latest
+    needs: plan
+    if: needs.plan.result == 'success'  # ✅ Only run if Plan job succeeded
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
