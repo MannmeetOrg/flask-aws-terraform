@@ -76,7 +76,6 @@ resource "aws_instance" "flask_ec2" {
   subnet_id                   = aws_subnet.main.id  # ✅ Custom VPC
   vpc_security_group_ids      = [aws_security_group.flask_sg.id] # Custom VPC
   associate_public_ip_address = true
-  map_public_ip_on_launch    = true
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
