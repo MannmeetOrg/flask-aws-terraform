@@ -29,8 +29,3 @@ resource "aws_route_table" "flask-rt" {
     Name = "flask-rt"
   }
 }
-resource "aws_route_table_association" "associate_main_rt" {
-  subnet_id      = aws_subnet.main.id
-  gateway_id     = aws_internet_gateway.igw.id
-  route_table_id = aws_route_table.flask-rt.id
-}
