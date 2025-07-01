@@ -1,14 +1,10 @@
-name: Terraform Pipeline
+name: Terraform Plan & Apply
 
 on:
-  push:
-    branches:
-      - "*"           # Auto Plan on any branch push
-
-  workflow_dispatch:   # Manual trigger for Apply
+  workflow_dispatch:
     inputs:
       run_apply:
-        description: "Do you want to run Terraform Apply?"
+        description: "Do you want to run Terraform Apply after Plan?"
         required: true
         default: "no"
         type: choice
@@ -18,9 +14,11 @@ on:
 
 jobs:
   plan:
-    name: Terraform Plan (Auto)
-    if: github.event_name == 'push'
+    name: Terraform Plan
     runs-on: ubuntu-latest
+
+    outputs:
+      plan_status: ${{ steps.plan_step.outcome }}
 
     steps:
       - uses: actions/checkout@v4
@@ -40,12 +38,14 @@ jobs:
         working-directory: Deployment
 
       - name: Terraform Plan
+        id: plan_step
         run: terraform plan -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}"
         working-directory: Deployment
 
   apply:
-    name: Terraform Apply (Manual)
-    if: github.event.inputs.run_apply == 'yes'
+    name: Terraform Apply
+    needs: plan
+    if: ${{ github.event.inputs.run_apply == 'yes' && success() }}
     runs-on: ubuntu-latest
 
     steps:
