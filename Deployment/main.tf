@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_security_group" "flask_sg" {
   name        = "flask_app_sg"
   description = "Allow HTTP and HTTPS access"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id  # ✅ Match this to the same VPC as subnet
 
   ingress {
     from_port   = 80
@@ -59,7 +59,8 @@ resource "aws_instance" "flask_ec2" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = var.key_pair_name
-  vpc_security_group_ids      = [aws_security_group.flask_sg.id]
+  subnet_id                   = aws_subnet.main.id  # ✅ Custom VPC
+  vpc_security_group_ids      = [aws_security_group.flask_sg.id] # Custom VPC
   associate_public_ip_address = true
   user_data = <<-EOF
               #!/bin/bash
