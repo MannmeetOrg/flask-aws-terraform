@@ -32,3 +32,8 @@ variable "instance_type" {
   description = "EC2 instance type"
   type        = string
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "Optional vpc_id input"
+}
