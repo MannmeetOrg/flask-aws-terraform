@@ -72,7 +72,7 @@ resource "aws_security_group" "flask_sg" {
 resource "aws_instance" "flask_ec2" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
-  key_name                    = var.key_pair_name.auth.key_name
+  key_name                    = var.key_pair_name
   subnet_id                   = aws_subnet.main.id  # ✅ Custom VPC
   vpc_security_group_ids      = [aws_security_group.flask_sg.id] # Custom VPC
   associate_public_ip_address = true
