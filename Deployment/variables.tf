@@ -37,3 +37,7 @@ variable "vpc_id" {
   type        = string
   description = "Optional vpc_id input"
 }
+variable "ssh_public_key" {
+  type        = string
+  description = "Public key used for ssh access"
+}
