@@ -31,9 +31,10 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan \
-          -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
-          -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
+        run: |
+          terraform plan \
+            -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
+            -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
         working-directory: Deployment
 
   apply:
@@ -61,8 +62,9 @@ jobs:
         working-directory: Deployment
 
       - name: Terraform Apply
-        run: terraform apply \
-          -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
-          -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" \ 
-          --auto-approve
+        run: |
+          terraform apply \
+            -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
+            -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" \ 
+            --auto-approve
         working-directory: Deployment
