@@ -29,9 +29,9 @@ jobs:
         working-directory: Deployment
 
       - name: Terraform Destroy
-        run:
+        run: |
           terraform destroy \
-          -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
-          -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" \
-          --auto-approve
+            -var="key_pair_name=${{ secrets.KEY_PAIR_NAME }}" \
+            -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" \
+            --auto-approve
         working-directory: Deployment
