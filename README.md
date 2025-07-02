@@ -1,45 +1,182 @@
-# 🚀 Automated Flask App Deployment using Terraform on AWS
+# Flask AWS Terraform Deployment
 
-This project demonstrates how to automatically deploy a simple Flask application to AWS EC2 using Terraform. It includes infrastructure as code (IaC), a `Makefile` for app setup, and GitHub Actions workflows for CI/CD and safe destruction.
+Deploy a **Python Flask web application** to AWS using **Terraform**. This project automates the provisioning of AWS infrastructure and the deployment of a Flask app on an EC2 instance, following Infrastructure-as-Code and DevOps best practices.
 
 ---
 
-## 📁 Project Structure
+## 📦 Project Structure
 
 ```
 .
-├── .github/
-│ └── workflows/
-│ ├── terraform.yml # CI/CD workflow (manual apply)
-│ └── destroy.yml # Workflow to manually destroy resources
-├── app/
-│ ├── app.py # Flask application
-│ └── requirements.txt # Flask dependency
-├── terraform/
-│   ├── main.tf # Terraform resource definitions
-│   ├── variables.tf # Input variables
-│   ├── outputs.tf # Public IP output
-│   ├── terraform.tfvars # (Optional) Input values
-│   ├── backend.tf # (Optional) S3 backend config
-│   ├── key-pair.tf # (Optional) EC2 Key Pair configuration
-│   ├── security-group.tf # Security Group definition
-│   ├── instance.tf # EC2 Instance definition
-│   └── vpc.tf # VPC Definition
-├── Makefile # App startup automation (used in EC2)
-├── README.md # Project documentation
-└── .gitignore
+├── app/ # Flask application code
+│ ├── app.py
+│ ├── requirements.txt
+│ └── templates/
+├── Deployment/ # Terraform IaC files
+│ ├── main.tf
+│ ├── variables.tf
+│ ├── outputs.tf
+│ ├── backend.tf
+│ ├── key-pair.tf
+│ └── vpc.tf
+├── .github/workflows/ # GitHub Actions CI/CD
+│ ├── terraform.yml
+│ └── destroy.yml
+├── Makefile # Automation commands
+├── .env # Environment variables
+├── .gitignore
+└── README.md
 ```
+
+---
+
+---
+
+## 🚀 What Does This Project Do?
+
+- **Provisions AWS infrastructure** (VPC, Subnet, Security Group, EC2, etc.) using Terraform.
+- **Deploys a Python Flask app** on an AWS EC2 instance.
+- **Automates deployment** via GitHub Actions CI/CD.
+- **Manages secrets and keys** securely.
+- **Follows DevOps best practices** for reproducibility, automation, and security.
+
+---
+
+## 🖼️ Deployment Architecture
+
+Below is a simplified architecture diagram of the deployment:
+
+---
+![img.png](img.png)
 
 ---
 
 ## 🛠️ Prerequisites
 
-- AWS Account + EC2 Key Pair
-- Terraform CLI (>= 1.3.0)
-- AWS CLI (configured)
-- GitHub repository with:
-    - `AWS_ACCESS_KEY_ID`
-    - `AWS_SECRET_ACCESS_KEY` in `Repo → Settings → Secrets → Actions`
+- **AWS Account** with access keys
+- **AWS CLI** installed and configured
+- **Terraform** (v1.0+)
+- **Python 3.8+**
+- **Git** and **Make**
+- (Optional) **Docker** for local testing
+
+---
+
+## ⚙️ Setup & Usage
+
+### 1. Clone the Repository
+
+git clone https://github.com/MannmeetOrg/flask-aws-terraform.git
+cd flask-aws-terraform
+
+---
+
+## 🛠️ Prerequisites
+
+- **AWS Account** with access keys
+- **AWS CLI** installed and configured
+- **Terraform** (v1.0+)
+- **Python 3.8+**
+- **Git** and **Make**
+- (Optional) **Docker** for local testing
+
+---
+
+## ⚙️ Setup & Usage
+
+### 1. Clone the Repository
+
+git clone https://github.com/MannmeetOrg/flask-aws-terraform.git
+cd flask-aws-terraform
+
+text
+
+### 2. Configure AWS Credentials
+
+aws configure
+
+text
+
+### 3. Initialize and Apply Terraform
+
+cd Deployment
+terraform init
+terraform plan
+terraform apply
+
+text
+
+- This will provision all AWS resources and output the public IP address of your EC2 instance.
+
+### 4. Deploy Flask Application
+
+The EC2 instance is provisioned with a **user data script** that:
+- Installs Python and dependencies
+- Clones this repository
+- Installs the Flask app and starts it
+
+You can also SSH into the instance (if needed) using the generated key pair.
+
+### 5. Access the Application
+
+- Open your browser and navigate to:  
+  http://<EC2-PUBLIC-IP>/
+
+text
+(Replace `<EC2-PUBLIC-IP>` with the output from Terraform.)
+
+---
+
+## 👩‍💻 Local Development
+
+1. **Install dependencies:**
+   cd app
+   pip install -r requirements.txt
+
+text
+
+2. **Run the Flask app locally:**
+   python app.py
+
+text
+
+3. **Visit** [http://localhost:5000](http://localhost:5000)
+
+---
+
+## 🧑‍🔬 CI/CD Pipeline
+
+- **GitHub Actions** automates Terraform deployment on push.
+- Workflows are defined in `.github/workflows/terraform.yml` and `destroy.yml`.
+- Secrets (like AWS keys) are managed in GitHub repository settings.
+
+---
+
+## 🔐 Security & Key Management
+
+- **SSH keys** are managed via Terraform (`key-pair.tf`).
+- **Never commit private keys** to the repository.
+- Use GitHub Secrets for sensitive values.
+
+---
+
+## 🧹 Clean Up
+
+To destroy all AWS resources:
+
+cd Deployment
+terraform destroy
+
+text
+
+---
+
+## 📝 Notes & Best Practices
+
+- **Do not expose your AWS credentials or private keys.**
+- **Use remote state storage** (like S3) for Terraform in production.
+- **Regularly rotate SSH keys and AWS secrets.**
+- **Monitor your AWS resources** for unexpected costs.
 
 ---
 
@@ -49,15 +186,25 @@ This project demonstrates how to automatically deploy a simple Flask application
 
     ```
         # File: app/app.py
-        from flask import Flask
+        from flask import Flask, render_template
+        from dotenv import load_dotenv
+        import os
+
+        load_dotenv()
+
         app = Flask(__name__)
 
         @app.route('/')
-        def hello():
-        return "Hello from Flask deployed with Terraform on AWS!"
-
-        if __name__ == "__main__":
-        app.run(host='0.0.0.0', port=80)
+        def home():
+        return render_template('index.html')
+        
+        @app.route('/health')
+        def health():
+        return {'status': 'healthy'}, 200
+        
+        if __name__ == '__main__':
+        port = int(os.environ.get('PORT', 5000))
+        app.run(debug=False, host='0.0.0.0', port=port)
     ```
 </details> ```
 
@@ -68,10 +215,26 @@ This project demonstrates how to automatically deploy a simple Flask application
     <summary>Show Code</summary>
 
     ```makefile
-    install:
-    	echo "Starting Flask app installation..." 
-    	cd app && pip3 install -r requirements.txt 
-    	cd app && nohup python3 app.py &
+        .PHONY: install start stop status
+
+        install:
+        @echo "Installing Flask application..."
+        cd app && pip3 install -r requirements.txt --user
+        @echo "Installation completed successfully"
+        
+        start:
+        @echo "Starting Flask application..."
+        cd app && nohup python3 app.py > ../app.log 2>&1 &
+        @echo "Application started. Check app.log for details"
+        
+        stop:
+        @echo "Stopping Flask application..."
+        pkill -f "python3 app.py" || true
+        @echo "Application stopped"
+        
+        status:
+        @pgrep -f "python3 app.py" && echo "Application is running" || echo "Application is not running"
+
     ```
   </details>
 
@@ -103,15 +266,8 @@ You’ll see the public IP in GitHub Actions output and in terraform output.
 
 * Click Run workflow
 
-* Type destroy in the prompt to confirm
- 
-<details> <summary>Show Code</summary>
-
-    ```destroy
-        inputs:
-        confirm: "destroy"  # Required to continue
-    ```
-</details>``
+* This will destroy all deployed resources safely
+---
     
 ## 💡 Customization Ideas
 * Replace EC2 with Fargate or Beanstalk
